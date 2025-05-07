@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @task %>
+
+<div>
+  <%= link_to "Görevi Düzenle", edit_task_path(@task) %> |
+  <%= link_to "Görevlere Dön", tasks_path %>
+
+  <%= button_to "Görevi Sil", @task, method: :delete, class: "btn btn-danger mt-2" %>
+</div>

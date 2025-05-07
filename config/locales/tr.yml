@@ -1,0 +1,18 @@
+tr:
+  hello: "Merhaba"
+  date:
+    formats:
+      default: "%d.%m.%Y"
+      short: "%d %b"
+      long: "%d %B %Y"
+  time:
+    formats:
+      default: "%d.%m.%Y %H:%M"
+  activerecord:
+    models:
+      task: "Görev"
+    attributes:
+      task:
+        title: "Başlık"
+        description: "Açıklama"
+        due_date: "Son Tarih"

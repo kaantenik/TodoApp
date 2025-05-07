@@ -1,0 +1,52 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Başlık</th>
+      <th>Kategori</th>
+      <th>Öncelik</th>
+      <th>Son Tarih</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% tasks.each do |task| %>
+      <tr class="<%= 'table-success' if task.completed? %>">
+        <td>
+          <div class="fw-bold"><%= task.title %></div>
+          <% if task.description.present? %>
+            <small class="text-muted"><%= task.description %></small>
+          <% end %>
+        </td>
+        <td>
+          <% if task.category %>
+            <span class="badge bg-info"><%= task.category.name %></span>
+          <% else %>
+            -
+          <% end %>
+        </td>
+        <td>
+          <span class="badge bg-<%= task.priority_color %>">
+            <%= task.turkish_priority %>
+          </span>
+        </td>
+        <td>
+          <div><%= task.formatted_due_date %></div>
+          <small class="text-<%= task.due_date < Date.current ? 'danger' : 'muted' %>">
+            <%= task.relative_due_date %>
+          </small>
+        </td>
+        <td>
+            <%= link_to 'Göster', task_path(task), class: "btn btn-sm btn-info" %>
+            <%= link_to 'Düzenle', edit_task_path(task), class: "btn btn-sm btn-warning" %>
+            <%= link_to 'Sil', task_path(task), method: :delete, data: { confirm: 'Silmek istediğine emin misin?' }, class: "btn btn-sm btn-danger" %>
+          </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if tasks.empty? %>
+  <div class="alert alert-info">
+    Filtre kriterlerinize uygun görev bulunamadı.
+  </div>
+<% end %> 

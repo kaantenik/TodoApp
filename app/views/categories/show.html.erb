@@ -1,0 +1,58 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <h1 class="card-title">
+      <%= @category.name %>
+      <div class="float-end">
+        <%= link_to 'Düzenle', edit_category_path(@category), class: "btn btn-warning" %>
+        <%= button_to 'Sil', @category, method: :delete, 
+            class: "btn btn-danger",
+            data: { confirm: 'Bu kategoriyi silmek istediğinize emin misiniz? Bu işlem geri alınamaz.' } %>
+      </div>
+    </h1>
+    <p class="card-text text-muted">
+      <%= @category.description.presence || "Açıklama yok" %>
+    </p>
+  </div>
+</div>
+
+<h2 class="mb-3">Bu Kategorideki Görevler</h2>
+
+<% if @category.tasks.any? %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Başlık</th>
+          <th>Öncelik</th>
+          <th>Son Tarih</th>
+          <th>Durum</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @category.tasks.each do |task| %>
+          <tr class="<%= 'table-success' if task.completed? %>">
+            <td><%= task.title %></td>
+            <td><%= task.turkish_priority %></td>
+            <td><%= task.formatted_due_date %></td>
+            <td><%= task.completed? ? 'Tamamlandı' : 'Bekliyor' %></td>
+            <td>
+              <%= link_to 'Göster', task, class: "btn btn-sm btn-info" %>
+              <%= link_to 'Düzenle', edit_task_path(task), class: "btn btn-sm btn-warning" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class="alert alert-info">
+    Bu kategoride henüz görev bulunmuyor.
+  </div>
+<% end %>
+
+<div class="mt-4">
+  <%= link_to 'Kategorilere Dön', categories_path, class: "btn btn-secondary" %>
+</div>

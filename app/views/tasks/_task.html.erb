@@ -1,0 +1,31 @@
+<div id="<%= dom_id task %>">
+  <p>
+    <strong>Başlık:</strong>
+    <%= task.title %>
+  </p>
+
+  <p>
+    <strong>Açıklama:</strong>
+    <%= task.description %>
+  </p>
+
+  <p>
+    <strong>Son Tarih:</strong>
+    <%= task.formatted_due_date %>
+  </p>
+
+  <p>
+    <strong>Öncelik:</strong>
+    <%= task.turkish_priority %>
+  </p>
+
+  <p>
+    <strong>Tamamlandı:</strong>
+    <%= task.completed ? 'Evet' : 'Hayır' %>
+  </p>
+
+  <p>
+    <strong>Kategori:</strong>
+    <%= task.category&.name || "-" %>
+  </p>
+</div>
